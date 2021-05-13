@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      class="link-input"
+      placeholder="Paste any url to fetch the link"
+    />
+    <button type="submit" onclick="submitLink()">Submit</button>
+  </body>
+</html>
+
+<script>
+  async function submitLink() {
+    const link = document.querySelector(".link-input").value;
+
+    const response = await fetch("http://localhost:3000/link", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ link }),
+    });
+    if (response.status == 200) {
+      alert("data fetched");
+    } else if (response.status == 404) {
+      alert("provide valid url");
+    }
+  }
+</script>
